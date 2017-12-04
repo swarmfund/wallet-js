@@ -3,7 +3,7 @@
     "version": "0.1.2",
     "private": true,
     "dependencies": {
-        "@tokend/js-base": "git+ssh://git@gitlab.com:tokend/js-base.git#dev",
+        "@swarmfund/js-base": "git+ssh://git@gitlab.com:swarmfund/js-base.git#feature/reviewable_request",
         "lodash": "~2.4.1",
         "sjcl": "git+https://github.com/stellar/sjcl.git",
         "sjcl-scrypt": "git+https://github.com/stellar/sjcl-scrypt.git",
