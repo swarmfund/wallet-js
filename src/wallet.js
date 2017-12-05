@@ -1,7 +1,7 @@
 var crypto = require('./util/crypto');
 var sjcl = require('./util/sjcl');
 
-var Keypair = require("@tokend/js-base").Keypair;
+var Keypair = require("swarm-js-base").Keypair;
 
 var nacl = require('tweetnacl');
 
