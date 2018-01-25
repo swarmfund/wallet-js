@@ -9,7 +9,8 @@ module.exports = {
   calculateWalletParams: calculateWalletParams,
   decryptKeychainData: decryptKeychainData,
   generateWalletData: generateWalletData,
-  generateFactorData: generateFactorData
+  generateFactorData: generateFactorData,
+  generateRecoveryData: generateRecoveryData
 }
 
 /**
@@ -103,6 +104,28 @@ function generateFactorData (password, email, kdfParams) {
         account_id: factorPublicKey,
         keychain_data: factorKeychainData,
         salt: factorSalt
+      }
+    }
+  }
+}
+
+function generateRecoveryData (recoverySeed, email, kdfParams, rawKeychainData, accountId) {
+  var recoverySalt = nacl.util.encodeBase64(nacl.randomBytes(16));
+
+  var recoveryWalletParams = calculateWalletParams(recoverySeed, email, recoverySalt, kdfParams);
+  var recoveryWalletId = recoveryWalletParams.walletId
+  var recoveryWalletKey = recoveryWalletParams.walletKey;
+
+  var recoveryKeychainData = crypto.encryptData(rawKeychainData, recoveryWalletKey);
+
+  return {
+    data: {
+      type: 'password',
+      id: recoveryWalletId,
+      attributes: {
+        account_id: accountId,
+        keychain_data: recoveryKeychainData,
+        salt: recoverySalt
       }
     }
   }
